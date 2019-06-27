@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
  * meétodos para o mesmo.
  * 
  * @version 1.0
+ * @author rapha
  * 
  */
 
