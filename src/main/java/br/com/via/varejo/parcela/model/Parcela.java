@@ -8,13 +8,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.via.varejo.produto.model.Produto;
 import br.com.via.varejo.util.model.BaseEntity;
 
 /**
  * Classe onde será armazeda as informações da quantidade de parcelas para determinado produto
  * 
  * @author rapha
- * @version 1.0
+ * @version 1.2
  *
  */
 @Entity
