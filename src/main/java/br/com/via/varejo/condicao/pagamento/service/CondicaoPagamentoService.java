@@ -20,6 +20,6 @@ public interface CondicaoPagamentoService {
 
 	CondicaoPagamento atualizar(CondicaoPagamento condicaoPagamento);
 
-	CondicaoPagamento deletar(CondicaoPagamento condicaoPagamento);
+	void deletar(Long idCondicaoPagamento);
 
 }

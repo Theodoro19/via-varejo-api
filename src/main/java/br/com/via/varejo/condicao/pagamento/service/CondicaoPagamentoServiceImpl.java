@@ -36,7 +36,7 @@ public class CondicaoPagamentoServiceImpl implements CondicaoPagamentoService{
 
 	// MÉTODO PARA DELETAR UMA CONDIÇÃO DE PAGAMENTO
 	@Override
-	public CondicaoPagamento deletar(CondicaoPagamento condicaoPagamento) {
+	public void deletar(Long idCondicaoPagamento) {
 		// TODO Auto-generated method stub
 		return null;
 	}

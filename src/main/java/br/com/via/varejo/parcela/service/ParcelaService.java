@@ -19,5 +19,5 @@ public interface ParcelaService {
 
 	Parcela atualizar(Parcela parcela);
 
-	Parcela deletar(Parcela parcela);
+	void deletar(Long idParcela);
 }

@@ -15,11 +15,11 @@ public interface ProdutoService {
 
 	List<Produto> obterTodos();
 	
-	List<Produto> obterUm(Long idProduto);
+	Produto obterUm(Long idProduto);
 	
 	Produto salvar(Produto produto);
 
 	Produto atualizar(Produto produto);
 
-	Produto deletar(Produto produto);
+	Produto deletar(Long idProduto);
 }

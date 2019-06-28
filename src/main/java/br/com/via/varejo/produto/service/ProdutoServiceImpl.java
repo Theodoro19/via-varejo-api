@@ -23,7 +23,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	// MÉTODO PARA BUSCAR UM PRODUTO COM BASE NO ID
 
 	@Override
-	public List<Produto> obterUm(Long idProduto) {
+	public Produto obterUm(Long idProduto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,7 +44,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	// MÉTODO PARA DELETAR UM PRODUTO
 	@Override
-	public Produto deletar(Produto produto) {
+	public Produto deletar(Long idProduto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

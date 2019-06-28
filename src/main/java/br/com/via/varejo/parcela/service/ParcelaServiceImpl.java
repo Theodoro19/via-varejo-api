@@ -36,9 +36,8 @@ public class ParcelaServiceImpl implements ParcelaService {
 
 	// MÉTODO PARA DELETAR UMA PARCELA
 	@Override
-	public Parcela deletar(Parcela parcela) {
+	public void deletar(Long idParcela) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
