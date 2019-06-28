@@ -16,4 +16,6 @@ public interface ParcelaService {
 	Parcela salvar(Parcela parcela);
 
 	String deletar(Long idParcela);
+
+	String deletarTodos(Long idProduto);
 }
