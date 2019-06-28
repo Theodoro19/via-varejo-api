@@ -1,5 +1,7 @@
 package br.com.via.varejo.produto.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.via.varejo.produto.model.Produto;
@@ -11,7 +13,7 @@ import br.com.via.varejo.produto.model.Produto;
 @Service
 public interface ProdutoService {
 
-	Iterable<Produto> obterTodos();
+	List<Produto> obterTodos();
 
 	Produto obterUm(Long idProduto);
 

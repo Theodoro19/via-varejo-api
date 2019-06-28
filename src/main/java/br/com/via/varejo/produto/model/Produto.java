@@ -1,7 +1,6 @@
 package br.com.via.varejo.produto.model;
 
 import static java.lang.Boolean.TRUE;
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 
 import java.math.BigDecimal;
@@ -26,7 +25,7 @@ import br.com.via.varejo.util.model.BaseEntity;
  * Classe onde será armazeda as informações sobre determinado produto
  *
  * @author rapha
- * @version 1.2
+ * @version 1.3
  *
  */
 @Entity
@@ -43,12 +42,12 @@ public class Produto extends BaseEntity {
 	@Column(name = "prod_in_ativo")
 	private Boolean ativo = TRUE;
 
-	@OneToOne(mappedBy = "produto", fetch = LAZY, cascade = ALL)
+	@OneToOne(mappedBy = "produto", fetch = LAZY)
 	@Fetch(FetchMode.SELECT)
 	@BatchSize(size = 100)
 	private CondicaoPagamento condicaoPagamento;
 
-	@OneToMany(mappedBy = "produto", fetch = LAZY, cascade = ALL)
+	@OneToMany(mappedBy = "produto", fetch = LAZY)
 	@Fetch(FetchMode.SELECT)
 	@BatchSize(size = 100)
 	private List<Parcela> listaParcelas;

@@ -24,7 +24,7 @@ public class CondicaoPagamentoServiceImpl implements CondicaoPagamentoService {
 	@Override
 	public CondicaoPagamento obterTodos(Long idProduto) {
 
-		return condicaoPagamentoRepository.findByProduto(produtoService.obterUm(idProduto));
+		return produtoService.obterUm(idProduto).getCondicaoPagamento();
 	}
 
 	// MÉTODO PARA SALVAR UMA CONDIÇÃO DE PAGAMENTO

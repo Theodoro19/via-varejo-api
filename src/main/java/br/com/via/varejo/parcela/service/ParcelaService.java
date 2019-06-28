@@ -1,5 +1,7 @@
 package br.com.via.varejo.parcela.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.via.varejo.parcela.model.Parcela;
@@ -15,7 +17,5 @@ public interface ParcelaService {
 
 	Parcela salvar(Parcela parcela);
 
-	String deletar(Long idParcela);
-
-	String deletarTodos(Long idProduto);
+	void deletarTodos(List<Parcela> listaParcela);
 }

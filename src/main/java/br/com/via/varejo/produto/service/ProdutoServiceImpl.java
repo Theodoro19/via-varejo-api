@@ -3,17 +3,21 @@ package br.com.via.varejo.produto.service;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.via.varejo.condicao.pagamento.service.CondicaoPagamentoService;
+import br.com.via.varejo.parcela.model.Parcela;
+import br.com.via.varejo.parcela.service.ParcelaService;
 import br.com.via.varejo.produto.model.Produto;
 import br.com.via.varejo.produto.model.ProdutoRepository;
 
 /**
  * @author rapha
- * @version 1.0
+ * @version 1.1
  */
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -21,11 +25,25 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
+	@Autowired
+	private ParcelaService parcelaService;
+
+	@Autowired
+	private CondicaoPagamentoService condicaoPagamentoService;
+
 	// MÉTODO PARA BUSCAR TODAS OS PRODUTOS
 	@Override
-	public Iterable<Produto> obterTodos() {
-		
-		return produtoRepository.findAll();
+	public List<Produto> obterTodos() {
+
+		List<Produto> listaProduto = (List<Produto>) produtoRepository.findAll();
+
+		listaProduto.forEach(produto -> {
+
+			produto.setCondicaoPagamento(condicaoPagamentoService.obterTodos(produto.getId()));
+			produto.setListaParcelas((List<Parcela>) parcelaService.obterTodos(produto.getId()));
+		});
+
+		return listaProduto;
 	}
 
 	// MÉTODO PARA BUSCAR UM PRODUTO COM BASE NO ID
@@ -37,7 +55,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 		if (optional.isPresent()) {
 
-			return optional.get();
+			Produto produto = optional.get();
+
+			produto.setCondicaoPagamento(condicaoPagamentoService.obterTodos(produto.getId()));
+			produto.setListaParcelas((List<Parcela>) parcelaService.obterTodos(produto.getId()));
+
+			return produto;
 		}
 
 		return null;
@@ -55,6 +78,14 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 		produtoRepository.save(produto);
 
+		if (produto.getCondicaoPagamento() != null) {
+			condicaoPagamentoService.salvar(produto.getCondicaoPagamento());
+		}
+
+		if (produto.getListaParcelas() != null) {
+			produto.getListaParcelas().forEach(parcela -> parcelaService.salvar(parcela));
+		}
+
 		return produto;
 	}
 
@@ -68,6 +99,15 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 			return "Produto não encontrado!";
 		}
+
+		if (produto.getCondicaoPagamento() != null) {
+			condicaoPagamentoService.deletar(produto.getCondicaoPagamento().getId());
+		}
+
+		if (produto.getListaParcelas() != null) {
+			parcelaService.deletarTodos(produto.getListaParcelas());
+		}
+
 		produto.setAtivo(FALSE);
 
 		produtoRepository.save(produto);
