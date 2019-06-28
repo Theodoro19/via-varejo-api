@@ -1,17 +1,15 @@
 package br.com.via.varejo.condicao.pagamento.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.via.varejo.condicao.pagamento.model.CondicaoPagamento;
 import br.com.via.varejo.condicao.pagamento.model.CondicaoPagamentoRepository;
+import br.com.via.varejo.produto.service.ProdutoService;
 
 /**
  * @author rapha
- * @version 1.1
+ * @version 1.2
  */
 @Service
 public class CondicaoPagamentoServiceImpl implements CondicaoPagamentoService {
@@ -19,11 +17,14 @@ public class CondicaoPagamentoServiceImpl implements CondicaoPagamentoService {
 	@Autowired
 	private CondicaoPagamentoRepository condicaoPagamentoRepository;
 
+	@Autowired
+	private ProdutoService produtoService;
+
 	// MÉTODO PARA BUSCAR TODAS AS CONDIÇÕES DE PAGAMENTOS COM BASE NO ID DO PRODUTO
 	@Override
-	public List<CondicaoPagamento> obterTodos(Long idProduto) {
-		
-		return null;
+	public CondicaoPagamento obterTodos(Long idProduto) {
+
+		return condicaoPagamentoRepository.findByProduto(produtoService.obterUm(idProduto));
 	}
 
 	// MÉTODO PARA SALVAR UMA CONDIÇÃO DE PAGAMENTO
@@ -43,13 +44,11 @@ public class CondicaoPagamentoServiceImpl implements CondicaoPagamentoService {
 
 	// MÉTODO PARA DELETAR UMA CONDIÇÃO DE PAGAMENTO
 	@Override
-	public String deletar(Long idCondicaoPagamento) {
+	public String deletar(Long idProduto) {
 
-		Optional<CondicaoPagamento> optional = condicaoPagamentoRepository.findById(idCondicaoPagamento);
+		CondicaoPagamento condicaoPagamento = obterTodos(idProduto);
 
-		if (optional.isPresent()) {
-
-			CondicaoPagamento condicaoPagamento = optional.get();
+		if (condicaoPagamento != null) {
 
 			condicaoPagamento.setAtivo(Boolean.FALSE);
 
