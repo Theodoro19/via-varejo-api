@@ -8,18 +8,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import br.com.via.varejo.produto.model.Produto;
 import br.com.via.varejo.util.model.BaseEntity;
 
 /**
- * Classe onde será armazeda as informações da quantidade de parcelas para determinado produto
+ * Classe onde será armazeda as informações da quantidade de parcelas para
+ * determinado produto
  * 
  * @author rapha
- * @version 1.2
+ * @version 1.3
  *
  */
 @Entity
 @Table(name = "parcela")
+@Where(clause = "parc_in_ativo='t'")
 public class Parcela extends BaseEntity {
 
 	@ManyToOne
@@ -34,6 +38,9 @@ public class Parcela extends BaseEntity {
 
 	@Column(name = "parc_nr_taxa_juros")
 	private Integer taxaJurosAoMes;
+
+	@Column(name = "parc_in_ativo")
+	private Boolean ativo = Boolean.TRUE;
 
 	/**
 	 * @return the produto
@@ -89,5 +96,19 @@ public class Parcela extends BaseEntity {
 	 */
 	public void setTaxaJurosAoMes(Integer taxaJurosAoMes) {
 		this.taxaJurosAoMes = taxaJurosAoMes;
+	}
+
+	/**
+	 * @return the ativo
+	 */
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	/**
+	 * @param ativo the ativo to set
+	 */
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }
