@@ -37,7 +37,7 @@ public class Parcela extends BaseEntity {
 	private BigDecimal valor;
 
 	@Column(name = "parc_nr_taxa_juros")
-	private Integer taxaJurosAoMes;
+	private Double taxaJurosAoMes;
 
 	@Column(name = "parc_in_ativo")
 	private Boolean ativo = Boolean.TRUE;
@@ -87,14 +87,14 @@ public class Parcela extends BaseEntity {
 	/**
 	 * @return the taxaJurosAoMes
 	 */
-	public Integer getTaxaJurosAoMes() {
+	public Double getTaxaJurosAoMes() {
 		return taxaJurosAoMes;
 	}
 
 	/**
 	 * @param taxaJurosAoMes the taxaJurosAoMes to set
 	 */
-	public void setTaxaJurosAoMes(Integer taxaJurosAoMes) {
+	public void setTaxaJurosAoMes(Double taxaJurosAoMes) {
 		this.taxaJurosAoMes = taxaJurosAoMes;
 	}
 

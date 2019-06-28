@@ -31,6 +31,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Autowired
 	private CondicaoPagamentoService condicaoPagamentoService;
 
+	public static Integer QUANTIDADE_PARCELAS = 0;
+
 	// MÉTODO PARA BUSCAR TODAS OS PRODUTOS
 	@Override
 	public List<Produto> obterTodos() {
@@ -80,10 +82,20 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 		if (produto.getCondicaoPagamento() != null) {
 			condicaoPagamentoService.salvar(produto.getCondicaoPagamento());
+		} else {
+			condicaoPagamentoService.obterTodos(produto.getId());
 		}
 
+		QUANTIDADE_PARCELAS = produto.getCondicaoPagamento().getQuantidadeParcelas();
+
 		if (produto.getListaParcelas() != null) {
-			produto.getListaParcelas().forEach(parcela -> parcelaService.salvar(parcela));
+			if (produto.getId() != null) {
+				produto.getListaParcelas().forEach(parcela -> parcelaService.salvar(parcela, QUANTIDADE_PARCELAS));
+			}
+		} else {
+			if (produto.getId() != null) {
+				produto.setListaParcelas((List<Parcela>) parcelaService.obterTodos(produto.getId()));
+			}
 		}
 
 		return produto;

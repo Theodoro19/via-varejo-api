@@ -25,6 +25,8 @@ public class ParcelaServiceImpl implements ParcelaService {
 	@Autowired
 	private ProdutoService produtoService;
 
+	public static final Integer APLICAR_JUROS = 6;
+
 	// MÉTODO PARA BUSCAR TODAS AS PARCELAS COM BASE NO ID DO PRODUTO
 	@Override
 	public Iterable<Parcela> obterTodos(Long idProduto) {
@@ -34,7 +36,7 @@ public class ParcelaServiceImpl implements ParcelaService {
 
 	// MÉTODO PARA SALVAR UMA PARCELA
 	@Override
-	public Parcela salvar(Parcela parcela) {
+	public Parcela salvar(Parcela parcela, Integer quantidadeParcelas) {
 
 		if (parcela.getId() == null) {
 
@@ -42,6 +44,11 @@ public class ParcelaServiceImpl implements ParcelaService {
 		}
 
 		parcela.setAtivo(TRUE);
+
+		if (quantidadeParcelas > APLICAR_JUROS) {
+
+			parcela.setTaxaJurosAoMes(1.15);
+		}
 
 		parcelaRepository.save(parcela);
 

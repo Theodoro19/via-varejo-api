@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.via.varejo.parcela.model.Parcela;
 import br.com.via.varejo.produto.model.Produto;
 import br.com.via.varejo.produto.service.ProdutoService;
 
@@ -46,15 +47,15 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Produto> save(@RequestBody Produto produto) {
+	public ResponseEntity<List<Parcela>> save(@RequestBody Produto produto) {
 
-		return new ResponseEntity<Produto>(produtoService.salvar(produto), CREATED);
+		return new ResponseEntity<List<Parcela>>(produtoService.salvar(produto).getListaParcelas(), CREATED);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Produto> update(@RequestBody Produto produto) {
+	public ResponseEntity<List<Parcela>> update(@RequestBody Produto produto) {
 
-		return new ResponseEntity<Produto>(produtoService.salvar(produto), OK);
+		return new ResponseEntity<List<Parcela>>(produtoService.salvar(produto).getListaParcelas(), OK);
 	}
 
 	@RequestMapping(value = "/{idProduto}", method = RequestMethod.DELETE)

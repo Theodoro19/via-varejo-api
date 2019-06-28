@@ -15,7 +15,7 @@ public interface ParcelaService {
 
 	Iterable<Parcela> obterTodos(Long idProduto);
 
-	Parcela salvar(Parcela parcela);
+	Parcela salvar(Parcela parcela, Integer quantidadeParcelas);
 
 	void deletarTodos(List<Parcela> listaParcela);
 }
