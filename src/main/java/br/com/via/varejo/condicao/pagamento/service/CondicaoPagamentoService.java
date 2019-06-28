@@ -18,8 +18,6 @@ public interface CondicaoPagamentoService {
 
 	CondicaoPagamento salvar(CondicaoPagamento condicaoPagamento);
 
-	CondicaoPagamento atualizar(CondicaoPagamento condicaoPagamento);
-
-	void deletar(Long idCondicaoPagamento);
+	String deletar(Long idCondicaoPagamento);
 
 }
